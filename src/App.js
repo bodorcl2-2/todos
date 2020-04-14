@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import Todo from "./Todo";
 import TodoForm from "./TodoForm";
+import { v4 as uuidv4 } from "uuid";
 
 import "./App.css";
 
 function App() {
   const [tasks, setTasks] = useState([
     {
-      id: 0,
-      taskName: "pobudka",
+      id: uuidv4(),
+      taskGroup: "2a",
+      taskName: "luzik",
       taskDate: "2020-04-09",
-      taskHour: 8,
-      taskMinutes: 30,
+      taskTime: "08:00",
     },
   ]);
   const [newTask, setNewTask] = useState({
-    id: null,
+    id: "",
+    taskGroup: "",
     taskName: "",
     taskDate: "",
-    taskHour: null,
-    taskMinutes: null,
+    taskTime: "",
   });
 
   const handleOnDeleteTask = (e) => {
@@ -32,41 +33,40 @@ function App() {
 
   const handleOnAddTask = (e) => {
     e.preventDefault();
-    setNewTask((prevState) => [...prevState, [id]:])
+    setNewTask((prevState) => ({
+      newTask: Object.assign(prevState, { id: uuidv4() }),
+    }));
     setTasks((prevState) => [...prevState, newTask]);
+    setNewTask({
+      id: "",
+      taskName: "",
+      taskDate: "",
+      taskTime: "null",
+    });
   };
-
   const handleOnChange = ({ target: { name, value } }) => {
-    console.log(name, value);
     setNewTask((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-
-    // const today = new Date();
-    // console.log(today)
-    // const dayNow = today.getDate();
-    // console.log(typeof (dayNow))
-    // console.log(e.target.value < "2020-04-09" ? "wcześniej" : "później")
   };
 
   return (
     <div className="App">
-      {console.log(tasks)}
       {
-        // tasks.sort((a, b) => a.taskHour + b.taskHour).sort((a, b) => a.taskMinutes - b.taskMinutes).map((item, index)
+        // tasks.sort((a, b) => a.taskTime + b.taskTime).sort((a, b) => a.taskMinutes - b.taskMinutes).map((item, index)
         //nie działa sortowanie po godzinie i minutach
 
         tasks
           .sort((a) => a.taskName)
-          .map((item, index) => (
+          .map((item) => (
             <Todo
-              key={index}
+              key={item.id}
               id={item.id}
+              taskGroup={item.taskGroup}
               taskName={item.taskName}
               taskDate={item.taskDate}
-              taskHour={item.taskHour}
-              taskMinutes={item.taskMinutes}
+              taskTime={item.taskTime}
               handleOnDeleteTask={handleOnDeleteTask}
             />
           ))
@@ -74,6 +74,8 @@ function App() {
       <TodoForm
         handleOnAddTask={handleOnAddTask}
         handleOnChange={handleOnChange}
+        newTask={newTask}
+        // handleOnChangeDate={handleOnChangeDate}
       />
     </div>
   );
