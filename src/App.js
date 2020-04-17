@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Todo from "./Todo";
 import TodoForm from "./TodoForm";
 import { v4 as uuidv4 } from "uuid";
@@ -22,6 +22,18 @@ function App() {
     taskDate: "",
     taskTime: "",
   });
+
+  useEffect(() => {
+    const data = localStorage.getItem("my-todo");
+    if (data) {
+      setTasks(JSON.parse(data))
+    }
+  }, [])
+
+
+  useEffect(() => {
+    localStorage.setItem("my-todo", JSON.stringify(tasks))
+  })
 
   const handleOnDeleteTask = (e) => {
     let tasks1 = [...tasks];
@@ -75,7 +87,7 @@ function App() {
         handleOnAddTask={handleOnAddTask}
         handleOnChange={handleOnChange}
         newTask={newTask}
-        // handleOnChangeDate={handleOnChangeDate}
+      // handleOnChangeDate={handleOnChangeDate}
       />
     </div>
   );
