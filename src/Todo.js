@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import DeleteIcon from "@material-ui/icons/Delete";
-
+import EditIcon from "@material-ui/icons/Edit";
 const Todo = (props) => {
   return (
     <Box
@@ -16,16 +16,33 @@ const Todo = (props) => {
     >
       <h2>{props.taskGroup}</h2> <h2>{props.taskName}</h2>
       <h2>{props.taskDate}</h2> <h2>{props.taskTime}</h2>
-      <Button
-        id={props.id}
-        onClick={props.handleOnDeleteTask}
-        variant="contained"
-        color="secondary"
-        startIcon={<DeleteIcon />}
+      <Box
+        width="20%"
+        display="flex"
+        justifyContent="space-around"
+        alignItems="center"
       >
-        Usuń
+
+        <Button
+          id={props.id}
+          onClick={props.handleOnEditTask}
+          variant="contained"
+          color="primary"
+          startIcon={<EditIcon />}
+        >
+          Edytuj
       </Button>
-    </Box>
+        <Button
+          id={props.id}
+          onClick={props.handleOnDeleteTask}
+          variant="contained"
+          color="secondary"
+          startIcon={<DeleteIcon />}
+        >
+          Usuń
+      </Button>
+      </Box >
+    </Box >
   );
 };
 export default Todo;

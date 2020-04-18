@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+// import React, { useState } from "react";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
@@ -11,20 +12,6 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 const TodoForm = (props) => {
   const tasks = ["powtórka", "sprawdzian", "kartkówka", "pytanie", "luzik"];
   const groups = ["1a", "1b", "1c", "2a", "2b", "2c"];
-
-  const [task, setTask] = useState("");
-  const [group, setGroup] = useState("");
-
-  const handleChangeTask = (event) => {
-    setTask(event.target.value);
-  };
-  const handleChangeGroup = (event) => {
-    setGroup(event.target.value);
-  };
-  const handleOnChange = (event) => {
-    setTask("");
-    setGroup("");
-  };
 
   return (
     <form action="#" onSubmit={props.handleOnAddTask}>
@@ -40,10 +27,10 @@ const TodoForm = (props) => {
           <Select
             labelId="taskGroup"
             name="taskGroup"
-            id="taskGroupe"
-            value={group}
-            onChange={handleChangeGroup}
-            onBlur={props.handleOnChange}
+            id="taskGroup"
+            value={props.newTask.taskGroup ? props.newTask.taskGroup : ""}
+            // onChange={handleChangeGroup}
+            onChange={props.handleOnChange}
           >
             {groups.map((option) => (
               <MenuItem key={option} value={option}>
@@ -58,9 +45,9 @@ const TodoForm = (props) => {
             labelId="taskName"
             name="taskName"
             id="taskName"
-            value={task}
-            onChange={handleChangeTask}
-            onBlur={props.handleOnChange}
+            value={props.newTask.taskName ? props.newTask.taskName : ""}
+            // onClick={handleChangeTask}
+            onChange={props.handleOnChange}
           >
             {tasks.map((option) => (
               <MenuItem key={option} value={option}>
@@ -77,7 +64,7 @@ const TodoForm = (props) => {
             label="Data"
             name="taskDate"
             id="taskDate"
-            value={props.newTask.taskDate}
+            value={props.newTask.taskDate ? props.newTask.taskDate : ""}
             onChange={props.handleOnChange}
           />
           <FormHelperText>Data</FormHelperText>
@@ -90,18 +77,18 @@ const TodoForm = (props) => {
             max="15:10"
             name="taskTime"
             id="taskTime"
-            value={props.newTask.taskTime}
+            value={props.newTask.taskTime ? props.newTask.taskTime : ""}
             onChange={props.handleOnChange}
           />
           <FormHelperText>Godzina</FormHelperText>
         </FormControl>
+
         <FormControl>
           <Button
             type="submit"
             variant="contained"
             color="primary"
             startIcon={<AddCircleIcon />}
-            onClick={handleOnChange}
           >
             Dodaj
           </Button>

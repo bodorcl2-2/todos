@@ -17,10 +17,10 @@ function App() {
   ]);
   const [newTask, setNewTask] = useState({
     id: "",
-    taskGroup: "",
-    taskName: "",
-    taskDate: "",
-    taskTime: "",
+    taskGroup: "2a",
+    taskName: "luzik",
+    taskDate: "2020-04-09",
+    taskTime: "09:00",
   });
 
   useEffect(() => {
@@ -46,29 +46,38 @@ function App() {
   const handleOnAddTask = (e) => {
     e.preventDefault();
     setNewTask((prevState) => ({
+
       newTask: Object.assign(prevState, { id: uuidv4() }),
     }));
+    console.log(newTask)
     setTasks((prevState) => [...prevState, newTask]);
-    setNewTask({
-      id: "",
-      taskName: "",
-      taskDate: "",
-      taskTime: "null",
-    });
+    //   setNewTask({
+    //     id: "",
+    //     taskName: "",
+    //     taskDate: "",
+    //     taskTime: "null",
+    //   });
   };
+
+  const handleOnEditTask = (e) => {
+    e.preventDefault();
+    const editTask = tasks.filter((task) => task.id === e.target.id);
+    setNewTask(editTask);
+    console.log(newTask)
+  }
+
   const handleOnChange = ({ target: { name, value } }) => {
+    console.log(name, value)
     setNewTask((prevState) => ({
       ...prevState,
       [name]: value,
     }));
+    console.log(newTask)
   };
 
   return (
     <div className="App">
       {
-        // tasks.sort((a, b) => a.taskTime + b.taskTime).sort((a, b) => a.taskMinutes - b.taskMinutes).map((item, index)
-        //nie działa sortowanie po godzinie i minutach
-
         tasks
           .sort((a) => a.taskName)
           .map((item) => (
@@ -80,6 +89,7 @@ function App() {
               taskDate={item.taskDate}
               taskTime={item.taskTime}
               handleOnDeleteTask={handleOnDeleteTask}
+              handleOnEditTask={handleOnEditTask}
             />
           ))
       }
@@ -87,7 +97,6 @@ function App() {
         handleOnAddTask={handleOnAddTask}
         handleOnChange={handleOnChange}
         newTask={newTask}
-      // handleOnChangeDate={handleOnChangeDate}
       />
     </div>
   );
