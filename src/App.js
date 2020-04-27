@@ -15,13 +15,7 @@ function App() {
       taskTime: "08:00",
     },
   ]);
-  const [newTask, setNewTask] = useState({
-    id: "",
-    taskGroup: "2a",
-    taskName: "luzik",
-    taskDate: "2020-04-09",
-    taskTime: "09:00",
-  });
+
 
   useEffect(() => {
     const data = localStorage.getItem("my-todo");
@@ -43,37 +37,20 @@ function App() {
     setTasks(tasks1);
   };
 
-  const handleOnAddTask = (e) => {
-    e.preventDefault();
-    setNewTask((prevState) => ({
+  const handleOnAddTask = (newTask) => {
 
-      newTask: Object.assign(prevState, { id: uuidv4() }),
-    }));
-    console.log(newTask)
+
     setTasks((prevState) => [...prevState, newTask]);
-    //   setNewTask({
-    //     id: "",
-    //     taskName: "",
-    //     taskDate: "",
-    //     taskTime: "null",
-    //   });
+
   };
 
   const handleOnEditTask = (e) => {
     e.preventDefault();
     const editTask = tasks.filter((task) => task.id === e.target.id);
-    setNewTask(editTask);
-    console.log(newTask)
+    setTasks(editTask)
   }
 
-  const handleOnChange = ({ target: { name, value } }) => {
-    console.log(name, value)
-    setNewTask((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-    console.log(newTask)
-  };
+
 
   return (
     <div className="App">
@@ -95,8 +72,7 @@ function App() {
       }
       <TodoForm
         handleOnAddTask={handleOnAddTask}
-        handleOnChange={handleOnChange}
-        newTask={newTask}
+
       />
     </div>
   );
