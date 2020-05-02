@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from "react";
-import Todo from "./Todo";
-import TodoForm from "./TodoForm";
-import { v4 as uuidv4 } from "uuid";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import List from "./components/List";
+import AddTodo from "./components/AddTodo";
+import EditForm from "./components/EditForm";
+// import { v4 as uuidv4 } from "uuid";
 
 import "./App.css";
 
 function App() {
+
   const [tasks, setTasks] = useState([
     {
-      id: uuidv4(),
-      taskGroup: "2a",
-      taskName: "luzik",
-      taskDate: "2020-04-09",
-      taskTime: "08:00",
+      id: "",
+      taskGroup: "",
+      taskName: "",
+      taskDate: "",
+      taskTime: ""
     },
   ]);
-
 
   useEffect(() => {
     const data = localStorage.getItem("my-todo");
@@ -24,14 +31,23 @@ function App() {
     }
   }, [])
 
-
   useEffect(() => {
     localStorage.setItem("my-todo", JSON.stringify(tasks))
   })
 
+
+  const [editTask, setEditTask] = useState({
+    id: "58fe8041-e50b-4db0-85e4-9f0c4a134f31",
+    taskGroup: "1a",
+    taskName: "pytanie",
+    taskDate: "",
+    taskTime: ""
+  })
+
+
   const handleOnDeleteTask = (e) => {
     let tasks1 = [...tasks];
-    tasks1 = tasks1.filter((task) => task.id !== e.target.id);
+    tasks1 = tasks1.filter((task) => task.id !== e.currentTarget.id);
     // tasks1 = tasks1.sort((a, b) => a.hour - b.hour).filter(task => task.id != e.target.id)
     // tasks1.splice(e.target.id, 1)
     setTasks(tasks1);
@@ -39,42 +55,49 @@ function App() {
 
   const handleOnAddTask = (newTask) => {
 
-
     setTasks((prevState) => [...prevState, newTask]);
 
   };
 
-  const handleOnEditTask = (e) => {
-    e.preventDefault();
-    const editTask = tasks.filter((task) => task.id === e.target.id);
-    setTasks(editTask)
+  const settingEditTask = (e) => {
+
+    const task1 = tasks.filter((task) => task.id === e.currentTarget.id);
+    console.log(task1[0]);
+    setEditTask(task1[0]);
+    console.log(window.location)
+    // window.location.href = `${window.location}bla/jhkjhkj.html`;
+    // window.history.back()
+  }
+  const handleOnUpdateTask = (editTask) => {
+    console.log(editTask)
+
   }
 
-
-
   return (
-    <div className="App">
-      {
-        tasks
-          .sort((a) => a.taskName)
-          .map((item) => (
-            <Todo
-              key={item.id}
-              id={item.id}
-              taskGroup={item.taskGroup}
-              taskName={item.taskName}
-              taskDate={item.taskDate}
-              taskTime={item.taskTime}
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path="/">
+            <List
+              tasks={tasks}
               handleOnDeleteTask={handleOnDeleteTask}
-              handleOnEditTask={handleOnEditTask}
+              settingEditTask={settingEditTask}
             />
-          ))
-      }
-      <TodoForm
-        handleOnAddTask={handleOnAddTask}
-
-      />
-    </div>
+          </Route>
+          <Route path="/add">
+            <AddTodo
+              handleOnAddTask={handleOnAddTask}
+            />
+          </Route>
+          <Route exact path="/edit">
+            <EditForm
+              handleOnUpdateTask={handleOnUpdateTask}
+              editTask={editTask}
+            />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
