@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom'
-// import React, { useState } from "react";
+
 import Typography from '@material-ui/core/Typography';
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -42,6 +42,7 @@ const AddTodo = (props) => {
     <form action="#" onSubmit={(e) => {
       e.preventDefault()
       props.handleOnAddTask(newTask)
+      history.push(`/`)
     }} >
       <Box
         display="flex"
@@ -174,12 +175,13 @@ const AddTodo = (props) => {
 
         <Button
           onClick={(e) => {
+
             setNewTask(prevState => ({
               ...prevState,
               id: uuidv4()
             }))
           }}
-          onMouseUp={() => history.push(`/`)}
+          // onMouseUp={() => history.push(`/`)}
           type="submit"
           variant="contained"
           color="primary"

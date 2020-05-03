@@ -1,14 +1,12 @@
 import React from "react";
-// import {
-//   BrowserRouter as Router,
-//   Link
-// } from "react-router-dom";
+import { useHistory } from 'react-router-dom'
+
 import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
+import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import { useHistory } from 'react-router-dom'
 // import { browserHistory } from 'react-router'
 
 const Todo = (props) => {
@@ -33,15 +31,17 @@ const Todo = (props) => {
           {props.taskGroup}
         </Typography>
       </Box>
-      <Box width="30%" textAlign="center">
-        <Typography
-          variant="h5"
-          color="secondary"
-          gutterBottom
-        >
-          {props.taskName}
-        </Typography>
-      </Box>
+      <Tooltip title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laudantium dicta quia doloremque quas, distinctio natus officia necessitatibus facere, atque quibusdam illo cum architecto ipsam possimus at sapiente iure eum.">
+        <Box width="30%" textAlign="center">
+          <Typography
+            variant="h5"
+            color="secondary"
+            gutterBottom
+          >
+            {props.taskName}
+          </Typography>
+        </Box>
+      </Tooltip>
       <Box width="20%" textAlign="center">
         <Typography
           variant="h6"
@@ -64,9 +64,9 @@ const Todo = (props) => {
       >
         <Button
           id={props.id}
-          // onClick={() => history.push(`/edit/${}`)}
-          onClick={() => history.push(`/edit`)}
-          // onClick={props.handOnEditTask}
+          // czy da się przypisać dwa działania pod jedno zdarzenie?
+          onClick={() => history.push(`/edit:${props.id}`)}
+          onMouseUp={props.handleOnEditTask}
           variant="contained"
           color="primary"
           startIcon={<EditIcon />}

@@ -114,11 +114,9 @@ const List = (props) => {
             >
                 <Button
                     id={props.id}
-                    //   onClick={props.handleOnDeleteTask}
                     onClick={() => history.push(`/add`)}
                     variant="contained"
                     color="primary"
-                // startIcon={<DeleteIcon />}
                 >
                     Dodaj nowe
       </Button>

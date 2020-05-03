@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-// import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 import Typography from '@material-ui/core/Typography';
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -11,27 +12,31 @@ import Box from "@material-ui/core/Box";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { v4 as uuidv4 } from "uuid";
 
+
 const TodoForm = (props) => {
     const tasks = ["powtórka", "sprawdzian", "kartkówka", "pytanie", "luzik"];
     const groups = ["1a", "1b", "1c", "2a", "2b", "2c"];
 
-    console.log(props.editTask)
-    const { id, taskGroup, taskName, taskDate, taskTime } = props.editTask
+    let { id } = useParams();
+    console.log(id)
 
-    const [updateTask, setupdateTask] = useState({
-        id: id,
-        taskGroup: taskGroup,
-        taskName: taskName,
-        taskDate: taskDate,
-        taskTime: taskTime
+    const [updateTask, setUpdateTask] = useState({
+        id: "",
+        taskGroup: "",
+        taskName: "",
+        taskDate: "",
+        taskTime: ""
     });
 
-
-    console.log(`to z editTask ${updateTask}`)
+    // useEffect(() => {
+    //     setUpdateTask(
+    //         props.editTask
+    //     )
+    // }, [])
 
     const handleOnChange = (e) => {
         const { value, name } = e.target;
-        setupdateTask(prevState => ({
+        setUpdateTask(prevState => ({
             ...prevState,
             [name]: value,
             id: uuidv4()
@@ -173,7 +178,7 @@ const TodoForm = (props) => {
                 </FormControl>
 
                 <Button onClick={(e) => {
-                    setupdateTask(prevState => ({
+                    setUpdateTask(prevState => ({
                         ...prevState,
                         id: uuidv4()
                     }))
