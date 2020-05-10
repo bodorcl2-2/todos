@@ -3,6 +3,7 @@ import { TodoContext } from "../context/TodoContext";
 import { useHistory } from 'react-router-dom';
 
 import Todo from "./Todo";
+import { compareValues } from "../utils/Utils"
 import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
@@ -11,6 +12,7 @@ const List = () => {
 
     const { tasks, handleOnDeleteTask, settingEditTask } = useContext(TodoContext)
     const history = useHistory()
+
 
     return (
         <div>
@@ -75,7 +77,8 @@ const List = () => {
                 </Box>
             </Box>
             {
-                tasks
+                tasks.sort(compareValues('taskTime'))
+                    .sort(compareValues('taskDate'))
                     .map((item) => (
                         <Todo
                             key={item.id}
