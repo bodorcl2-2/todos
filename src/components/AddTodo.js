@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from 'react-router-dom'
-
 import { TodoContext } from "../context/TodoContext";
 import { DataToFormContext } from "../context/DataToFormContext";
+import { v4 as uuidv4 } from "uuid";
 
 import Typography from '@material-ui/core/Typography';
 import FormControl from "@material-ui/core/FormControl";
@@ -13,15 +13,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { v4 as uuidv4 } from "uuid";
 
 const AddTodo = () => {
 
   const { handleOnAddTask } = useContext(TodoContext);
   const { tasksName, groupsName } = useContext(DataToFormContext)
-
   const history = useHistory()
-
   const [newTask, setNewTask] = useState({
     id: "",
     taskGroup: "",
@@ -129,6 +126,7 @@ const AddTodo = () => {
           </Select>
           <FormHelperText>Wybierz klasę</FormHelperText>
         </FormControl>
+
         <FormControl>
           <Select
             labelId="taskName"
@@ -136,7 +134,6 @@ const AddTodo = () => {
             id="taskName"
             required
             value={newTask.taskName}
-            // onClick={handleChangeTask}
             onChange={handleOnChange}
           >
             {tasksName.map((option) => (
@@ -147,7 +144,6 @@ const AddTodo = () => {
           </Select>
           <FormHelperText>Wybierz zadanie</FormHelperText>
         </FormControl>
-
 
         <FormControl>
           <Input
@@ -174,18 +170,15 @@ const AddTodo = () => {
             onChange={handleOnChange}
           />
           <FormHelperText>Godzina</FormHelperText>
-
         </FormControl>
 
         <Button
           onClick={(e) => {
-
             setNewTask(prevState => ({
               ...prevState,
               id: uuidv4()
             }))
           }}
-          // onMouseUp={() => history.push(`/`)}
           type="submit"
           variant="contained"
           color="primary"

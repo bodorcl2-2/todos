@@ -12,10 +12,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import CheckIcon from "@material-ui/icons/Check";
-import { v4 as uuidv4 } from "uuid";
 
-
-const TodoForm = () => {
+const EditForm = () => {
 
     const history = useHistory()
 
@@ -23,10 +21,7 @@ const TodoForm = () => {
     const { tasks, handleOnUpdateTask } = useContext(TodoContext)
 
     let { id } = useParams();
-
     const tymczas = tasks.filter((task) => task.id === id)[0]
-
-
     const [updateTask, setUpdateTask] = useState(
         tymczas
     );
@@ -43,8 +38,7 @@ const TodoForm = () => {
         const { value, name } = e.target;
         setUpdateTask(prevState => ({
             ...prevState,
-            [name]: value,
-            id: uuidv4()
+            [name]: value
         }))
     }
 
@@ -189,7 +183,7 @@ const TodoForm = () => {
                     //         id: uuidv4()
                     //     }))
                     // }}
-                    onClick={() => history.push(`/edit${tasks.id}`)}
+                    onClick={() => history.push(`/`)}
                     type="submit"
                     variant="contained"
                     color="primary"
@@ -202,4 +196,4 @@ const TodoForm = () => {
         </form >
     );
 };
-export default TodoForm;
+export default EditForm;

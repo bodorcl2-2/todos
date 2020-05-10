@@ -24,7 +24,6 @@ const TodoContextProvider = (props) => {
         localStorage.setItem("my-todo", JSON.stringify(tasks))
     })
 
-
     const handleOnDeleteTask = (e) => {
         let tasks1 = [...tasks];
         tasks1 = tasks1.filter((task) => task.id !== e.currentTarget.id);

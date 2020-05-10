@@ -10,7 +10,6 @@ import Box from "@material-ui/core/Box";
 const List = () => {
 
     const { tasks, handleOnDeleteTask, settingEditTask } = useContext(TodoContext)
-
     const history = useHistory()
 
     return (
@@ -110,6 +109,5 @@ const List = () => {
         </div>
     )
 }
-
 
 export default List;
