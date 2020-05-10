@@ -4,13 +4,13 @@ export const TodoContext = createContext();
 
 const TodoContextProvider = (props) => {
     const [tasks, setTasks] = useState([
-        {
-            id: "",
-            taskGroup: "",
-            taskName: "",
-            taskDate: "",
-            taskTime: ""
-        },
+        // {
+        //     id: "",
+        //     taskGroup: "",
+        //     taskName: "",
+        //     taskDate: "",
+        //     taskTime: ""
+        // },
     ]);
 
     useEffect(() => {

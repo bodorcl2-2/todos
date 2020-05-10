@@ -104,7 +104,7 @@ const List = () => {
                     color="primary"
                 >
                     Dodaj nowe
-      </Button>
+                </Button>
             </Box>
         </div>
     )

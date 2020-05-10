@@ -20,7 +20,7 @@ const AddTodo = () => {
   const { tasksName, groupsName } = useContext(DataToFormContext)
   const history = useHistory()
   const [newTask, setNewTask] = useState({
-    id: "",
+    id: uuidv4(),
     taskGroup: "",
     taskName: "",
     taskDate: "",
@@ -32,7 +32,6 @@ const AddTodo = () => {
     setNewTask(prevState => ({
       ...prevState,
       [name]: value,
-      id: uuidv4()
     }))
   }
 
@@ -173,12 +172,6 @@ const AddTodo = () => {
         </FormControl>
 
         <Button
-          onClick={(e) => {
-            setNewTask(prevState => ({
-              ...prevState,
-              id: uuidv4()
-            }))
-          }}
           type="submit"
           variant="contained"
           color="primary"

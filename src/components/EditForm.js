@@ -20,19 +20,14 @@ const EditForm = () => {
     const { tasksName, groupsName } = useContext(DataToFormContext)
     const { tasks, handleOnUpdateTask } = useContext(TodoContext)
 
-    let { id } = useParams();
+    const { id } = useParams();
     const tymczas = tasks.filter((task) => task.id === id)[0]
     const [updateTask, setUpdateTask] = useState(
         tymczas
     );
 
-    // const { taskGorup, taskName, taskDate, taskTime } = updateTask
 
-    // useEffect(() => {
-    //     setUpdateTask(
-    //         props.editTask
-    //     )
-    // }, [])
+    // const { taskGorup, taskName, taskDate, taskTime } = updateTask
 
     const handleOnChange = (e) => {
         const { value, name } = e.target;
@@ -177,12 +172,6 @@ const EditForm = () => {
                 </FormControl>
 
                 <Button
-                    // onMouseUp={(e) => {
-                    //     setUpdateTask(prevState => ({
-                    //         ...prevState,
-                    //         id: uuidv4()
-                    //     }))
-                    // }}
                     onClick={() => history.push(`/`)}
                     type="submit"
                     variant="contained"
