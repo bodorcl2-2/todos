@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from 'react-router-dom'
+
+import { TodoContext } from "../context/TodoContext";
+import { DataToFormContext } from "../context/DataToFormContext";
 
 import Typography from '@material-ui/core/Typography';
 import FormControl from "@material-ui/core/FormControl";
@@ -12,14 +15,12 @@ import Box from "@material-ui/core/Box";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { v4 as uuidv4 } from "uuid";
 
-const AddTodo = (props) => {
+const AddTodo = () => {
+
+  const { handleOnAddTask } = useContext(TodoContext);
+  const { tasksName, groupsName } = useContext(DataToFormContext)
 
   const history = useHistory()
-
-  const tasks = ["powtórka", "sprawdzian", "kartkówka", "pytanie", "luzik"];
-  const groups = ["1a", "1b", "1c", "2a", "2b", "2c"];
-
-
 
   const [newTask, setNewTask] = useState({
     id: "",
@@ -41,7 +42,7 @@ const AddTodo = (props) => {
   return (
     <form action="#" onSubmit={(e) => {
       e.preventDefault()
-      props.handleOnAddTask(newTask)
+      handleOnAddTask(newTask)
       history.push(`/`)
     }} >
       <Box
@@ -111,16 +112,16 @@ const AddTodo = (props) => {
         boxShadow={2}
       >
         <FormControl>
-
           <Select
             labelId="taskGroup"
             name="taskGroup"
+            required
             id="taskGroup"
             value={newTask.taskGroup}
             // onChange={handleChangeGroup}
             onChange={handleOnChange}
           >
-            {groups.map((option) => (
+            {groupsName.map((option) => (
               <MenuItem key={option} value={option}>
                 {option}
               </MenuItem>
@@ -133,11 +134,12 @@ const AddTodo = (props) => {
             labelId="taskName"
             name="taskName"
             id="taskName"
+            required
             value={newTask.taskName}
             // onClick={handleChangeTask}
             onChange={handleOnChange}
           >
-            {tasks.map((option) => (
+            {tasksName.map((option) => (
               <MenuItem key={option} value={option}>
                 {option}
               </MenuItem>
@@ -153,6 +155,7 @@ const AddTodo = (props) => {
             label="Data"
             name="taskDate"
             id="taskDate"
+            required
             value={newTask.taskDate}
             onChange={handleOnChange}
           />
@@ -166,6 +169,7 @@ const AddTodo = (props) => {
             max="15:10"
             name="taskTime"
             id="taskTime"
+            required
             value={newTask.taskTime}
             onChange={handleOnChange}
           />

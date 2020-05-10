@@ -1,30 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom'
+import React, { useContext } from 'react';
+import { TodoContext } from "../context/TodoContext";
+import { useHistory } from 'react-router-dom';
+
+import Todo from "./Todo";
 import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
-import Todo from "./Todo";
 
-const List = (props) => {
+const List = () => {
+
+    const { tasks, handleOnDeleteTask, settingEditTask } = useContext(TodoContext)
 
     const history = useHistory()
-
-    const [tasks, setTasks] = useState([
-        {
-            id: "",
-            taskGroup: "",
-            taskName: "",
-            taskDate: "",
-            taskTime: ""
-        },
-    ]);
-
-
-    useEffect(() => {
-        setTasks([...props.tasks]);
-    }, [props.tasks])
-
-    console.log(tasks)
 
     return (
         <div>
@@ -90,7 +77,6 @@ const List = (props) => {
             </Box>
             {
                 tasks
-                    .sort((a) => a.taskDate)
                     .map((item) => (
                         <Todo
                             key={item.id}
@@ -99,8 +85,8 @@ const List = (props) => {
                             taskName={item.taskName}
                             taskDate={item.taskDate}
                             taskTime={item.taskTime}
-                            handleOnDeleteTask={props.handleOnDeleteTask}
-                            settingEditTask={props.settingEditTask}
+                            handleOnDeleteTask={handleOnDeleteTask}
+                            settingEditTask={settingEditTask}
                         />
                     ))
             }
@@ -113,7 +99,7 @@ const List = (props) => {
                 boxShadow={2}
             >
                 <Button
-                    id={props.id}
+                    id={tasks.id}
                     onClick={() => history.push(`/add`)}
                     variant="contained"
                     color="primary"

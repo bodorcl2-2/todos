@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import { DataToFormContext } from "../context/DataToFormContext";
+import { TodoContext } from "../context/TodoContext";
 
 import Typography from '@material-ui/core/Typography';
 import FormControl from "@material-ui/core/FormControl";
@@ -9,24 +11,27 @@ import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
+import CheckIcon from "@material-ui/icons/Check";
 import { v4 as uuidv4 } from "uuid";
 
 
-const TodoForm = (props) => {
-    const tasks = ["powtórka", "sprawdzian", "kartkówka", "pytanie", "luzik"];
-    const groups = ["1a", "1b", "1c", "2a", "2b", "2c"];
+const TodoForm = () => {
+
+    const history = useHistory()
+
+    const { tasksName, groupsName } = useContext(DataToFormContext)
+    const { tasks, handleOnUpdateTask } = useContext(TodoContext)
 
     let { id } = useParams();
-    console.log(id)
 
-    const [updateTask, setUpdateTask] = useState({
-        id: "",
-        taskGroup: "",
-        taskName: "",
-        taskDate: "",
-        taskTime: ""
-    });
+    const tymczas = tasks.filter((task) => task.id === id)[0]
+
+
+    const [updateTask, setUpdateTask] = useState(
+        tymczas
+    );
+
+    // const { taskGorup, taskName, taskDate, taskTime } = updateTask
 
     // useEffect(() => {
     //     setUpdateTask(
@@ -46,7 +51,7 @@ const TodoForm = (props) => {
     return (
         <form action="#" onSubmit={(e) => {
             e.preventDefault()
-            props.handleOnUpdateTask(updateTask)
+            handleOnUpdateTask(updateTask)
         }} >
             <Box
                 display="flex"
@@ -124,7 +129,7 @@ const TodoForm = (props) => {
                         // onChange={handleChangeGroup}
                         onChange={handleOnChange}
                     >
-                        {groups.map((option) => (
+                        {groupsName.map((option) => (
                             <MenuItem key={option} value={option}>
                                 {option}
                             </MenuItem>
@@ -141,7 +146,7 @@ const TodoForm = (props) => {
                         // onClick={handleChangeTask}
                         onChange={handleOnChange}
                     >
-                        {tasks.map((option) => (
+                        {tasksName.map((option) => (
                             <MenuItem key={option} value={option}>
                                 {option}
                             </MenuItem>
@@ -177,16 +182,18 @@ const TodoForm = (props) => {
 
                 </FormControl>
 
-                <Button onClick={(e) => {
-                    setUpdateTask(prevState => ({
-                        ...prevState,
-                        id: uuidv4()
-                    }))
-                }}
+                <Button
+                    // onMouseUp={(e) => {
+                    //     setUpdateTask(prevState => ({
+                    //         ...prevState,
+                    //         id: uuidv4()
+                    //     }))
+                    // }}
+                    onClick={() => history.push(`/edit${tasks.id}`)}
                     type="submit"
                     variant="contained"
                     color="primary"
-                    startIcon={<AddCircleIcon />}
+                    startIcon={<CheckIcon />}
                 >
                     Aktualizuj
           </Button>

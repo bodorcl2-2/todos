@@ -1,103 +1,83 @@
-import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
-import List from "./components/List";
-import AddTodo from "./components/AddTodo";
-import EditForm from "./components/EditForm";
+import React from "react";
+
+import TodoContextProvider from "./context/TodoContext";
+import RouteComp from './components/RouteComp'
+
 // import { v4 as uuidv4 } from "uuid";
 
 import "./App.css";
+import DataToFormContextProvider from "./context/DataToFormContext";
+
 
 function App() {
 
-  const [tasks, setTasks] = useState([
-    {
-      id: "",
-      taskGroup: "",
-      taskName: "",
-      taskDate: "",
-      taskTime: ""
-    },
-  ]);
 
-  useEffect(() => {
-    const data = localStorage.getItem("my-todo");
-    if (data) {
-      setTasks(JSON.parse(data))
-    }
-  }, [])
+  // const [tasks, setTasks] = useState([
+  //   {
+  //     id: "",
+  //     taskGroup: "",
+  //     taskName: "",
+  //     taskDate: "",
+  //     taskTime: ""
+  //   },
+  // ]);
 
-  useEffect(() => {
-    localStorage.setItem("my-todo", JSON.stringify(tasks))
-  })
+  // useEffect(() => {
+  //   const data = localStorage.getItem("my-todo");
+  //   if (data) {
+  //     setTasks(JSON.parse(data))
+  //   }
+  // }, [])
 
-
-  // const [editTask, setEditTask] = useState({
-  //   id: "",
-  //   taskGroup: "",
-  //   taskName: "",
-  //   taskDate: "",
-  //   taskTime: ""
+  // useEffect(() => {
+  //   localStorage.setItem("my-todo", JSON.stringify(tasks))
   // })
 
 
-  const handleOnDeleteTask = (e) => {
-    let tasks1 = [...tasks];
-    tasks1 = tasks1.filter((task) => task.id !== e.currentTarget.id);
-    // tasks1 = tasks1.sort((a, b) => a.hour - b.hour).filter(task => task.id !== e.target.id)
-    // tasks1.splice(e.target.id, 1)
-    setTasks(tasks1);
-  };
+  // // const [editTask, setEditTask] = useState({
+  // //   id: "",
+  // //   taskGroup: "",
+  // //   taskName: "",
+  // //   taskDate: "",
+  // //   taskTime: ""
+  // // })
 
-  const handleOnAddTask = (newTask) => {
 
-    setTasks((prevState) => [...prevState, newTask]);
+  // const handleOnDeleteTask = (e) => {
+  //   let tasks1 = [...tasks];
+  //   tasks1 = tasks1.filter((task) => task.id !== e.currentTarget.id);
+  //   // tasks1 = tasks1.sort((a, b) => a.hour - b.hour).filter(task => task.id !== e.target.id)
+  //   // tasks1.splice(e.target.id, 1)
+  //   setTasks(tasks1);
+  // };
 
-  };
+  // const handleOnAddTask = (newTask) => {
 
-  // const settingEditTask = (e) => {
+  //   setTasks((prevState) => [...prevState, newTask]);
 
-  //   const task1 = tasks.filter((task) => task.id === e.currentTarget.id);
-  //   console.log(task1[0]);
-  //   setEditTask(task1[0]);
-  //   console.log(window.location)
-  //   // window.location.href = `${window.location}bla/jhkjhkj.html`;
-  //   // window.history.back()
+  // };
+
+  // // const settingEditTask = (e) => {
+
+  // //   const task1 = tasks.filter((task) => task.id === e.currentTarget.id);
+  // //   console.log(task1[0]);
+  // //   setEditTask(task1[0]);
+  // //   console.log(window.location)
+  // //   // window.location.href = `${window.location}bla/jhkjhkj.html`;
+  // //   // window.history.back()
+  // // }
+
+  // const handleOnUpdateTask = (editTask) => {
+  //   console.log(editTask)
+
   // }
 
-  const handleOnUpdateTask = (editTask) => {
-    console.log(editTask)
-
-  }
-
   return (
-    <Router>
-      <div>
-        <Switch>
-          <Route exact path="/">
-            <List
-              tasks={tasks}
-              handleOnDeleteTask={handleOnDeleteTask}
-            // settingEditTask={settingEditTask}
-            />
-          </Route>
-          <Route path="/add">
-            <AddTodo
-              handleOnAddTask={handleOnAddTask}
-            />
-          </Route>
-          <Route exact path="/edit:id">
-            <EditForm
-              handleOnUpdateTask={handleOnUpdateTask}
-            // editTask={editTask}
-            />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <TodoContextProvider>
+      <DataToFormContextProvider>
+        <RouteComp />
+      </DataToFormContextProvider>
+    </TodoContextProvider>
   );
 }
 

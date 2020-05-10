@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from 'react-router-dom'
+import { TodoContext } from "../context/TodoContext";
 
 import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";
@@ -7,9 +8,11 @@ import Box from "@material-ui/core/Box";
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-// import { browserHistory } from 'react-router'
 
 const Todo = (props) => {
+
+  const { handleOnDeleteTask, handleOnEditTask } = useContext(TodoContext);
+
   const history = useHistory()
 
   return (
@@ -31,7 +34,7 @@ const Todo = (props) => {
           {props.taskGroup}
         </Typography>
       </Box>
-      <Tooltip title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laudantium dicta quia doloremque quas, distinctio natus officia necessitatibus facere, atque quibusdam illo cum architecto ipsam possimus at sapiente iure eum.">
+      <Tooltip title="Tu będą kiedyś wyświetlane szczeguły zadania ;)">
         <Box width="30%" textAlign="center">
           <Typography
             variant="h5"
@@ -65,8 +68,8 @@ const Todo = (props) => {
         <Button
           id={props.id}
           // czy da się przypisać dwa działania pod jedno zdarzenie?
-          onClick={() => history.push(`/edit:${props.id}`)}
-          onMouseUp={props.handleOnEditTask}
+          onClick={() => history.push(`/edit${props.id}`)}
+          onMouseUp={handleOnEditTask}
           variant="contained"
           color="primary"
           startIcon={<EditIcon />}
@@ -75,7 +78,7 @@ const Todo = (props) => {
             </Button>
         <Button
           id={props.id}
-          onClick={props.handleOnDeleteTask}
+          onClick={handleOnDeleteTask}
           variant="contained"
           color="secondary"
           startIcon={<DeleteIcon />}
