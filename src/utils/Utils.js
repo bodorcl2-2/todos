@@ -21,5 +21,7 @@ const compareValues = (key, order = 'asc') => {
         );
     };
 }
-
-export { compareValues };
+const reverseString = (str, sign) => {
+    return str.split(sign).reverse().join(sign);
+}
+export { compareValues, reverseString };

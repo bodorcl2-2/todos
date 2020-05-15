@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useHistory } from 'react-router-dom'
 import { TodoContext } from "../context/TodoContext";
+import { reverseString } from '../utils/Utils'
 
 import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";
@@ -60,7 +61,7 @@ const Todo = (props) => {
         <Typography
           variant="h6"
         >
-          {props.taskDate}
+          {reverseString(props.taskDate, '-')}
         </Typography>
       </Box>
       <Box width="20%" textAlign="center">
