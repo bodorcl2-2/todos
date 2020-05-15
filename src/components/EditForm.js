@@ -21,26 +21,24 @@ const EditForm = () => {
     const { tasks, handleOnUpdateTask } = useContext(TodoContext)
 
     const { id } = useParams();
-    const tymczas = tasks.filter((task) => task.id === id)[0]
+    const tymczas = tasks.find((task) => task.id === id)
     const [updateTask, setUpdateTask] = useState(
         tymczas
     );
-
-
-    // const { taskGorup, taskName, taskDate, taskTime } = updateTask
 
     const handleOnChange = (e) => {
         const { value, name } = e.target;
         setUpdateTask(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: value,
         }))
     }
 
     return (
-        <form action="#" onSubmit={(e) => {
+        <form onSubmit={(e) => {
             e.preventDefault()
             handleOnUpdateTask(updateTask)
+            history.push(`/`)
         }} >
             <Box
                 display="flex"
@@ -65,7 +63,6 @@ const EditForm = () => {
                 mt={-3}
                 ml={4}
                 mr={4}
-                // p={1}
                 boxShadow={2}
             >
                 <Box width="20%" textAlign="center">
@@ -115,7 +112,6 @@ const EditForm = () => {
                         name="taskGroup"
                         id="taskGroup"
                         value={updateTask.taskGroup}
-                        // onChange={handleChangeGroup}
                         onChange={handleOnChange}
                     >
                         {groupsName.map((option) => (
@@ -132,7 +128,6 @@ const EditForm = () => {
                         name="taskName"
                         id="taskName"
                         value={updateTask.taskName}
-                        // onClick={handleChangeTask}
                         onChange={handleOnChange}
                     >
                         {tasksName.map((option) => (
@@ -172,7 +167,6 @@ const EditForm = () => {
                 </FormControl>
 
                 <Button
-                    onClick={() => history.push(`/`)}
                     type="submit"
                     variant="contained"
                     color="primary"

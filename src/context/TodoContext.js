@@ -1,17 +1,15 @@
 import React, { useState, useEffect, createContext } from 'react';
+import { useHistory } from "react-router-dom";
 
 export const TodoContext = createContext();
 
 const TodoContextProvider = (props) => {
-    const [tasks, setTasks] = useState([
-        // {
-        //     id: "",
-        //     taskGroup: "",
-        //     taskName: "",
-        //     taskDate: "",
-        //     taskTime: ""
-        // },
-    ]);
+
+    const [tasks, setTasks] = useState([]);
+    const [compare, setCompare] = useState("taskDate");
+    const [sortingAsc, setSortingAsc] = useState("asc");
+
+
 
     useEffect(() => {
         const data = localStorage.getItem("my-todo");
@@ -27,8 +25,6 @@ const TodoContextProvider = (props) => {
     const handleOnDeleteTask = (e) => {
         let tasks1 = [...tasks];
         tasks1 = tasks1.filter((task) => task.id !== e.currentTarget.id);
-        // tasks1 = tasks1.sort((a, b) => a.hour - b.hour).filter(task => task.id !== e.target.id)
-        // tasks1.splice(e.target.id, 1)
         setTasks(tasks1);
     };
 
@@ -38,23 +34,30 @@ const TodoContextProvider = (props) => {
 
     };
 
-    // const settingEditTask = (e) => {
-
-    //   const task1 = tasks.filter((task) => task.id === e.currentTarget.id);
-    //   console.log(task1[0]);
-    //   setEditTask(task1[0]);
-    //   console.log(window.location)
-    //   // window.location.href = `${window.location}bla/jhkjhkj.html`;
-    //   // window.history.back()
-    // }
-
-    const handleOnUpdateTask = (editTask) => {
-        console.log(editTask)
-
+    const handleOnUpdateTask = (task) => {
+        const copy = [...tasks]
+        const index = copy.findIndex(item => item.id === task.id);
+        copy[index] = task;
+        setTasks(copy)
     }
 
+    const handleSortList = (e) => {
+        const prevCompare = compare;
+        setCompare(e.currentTarget.id);
+        if (prevCompare === e.currentTarget.id) {
+            setSortingAsc((sortingAsc === "asc") ? "desc" : "asc")
+        } else {
+            setSortingAsc("asc")
+        }
+    }
+
+    const handleOnFilter = (e) => {
+        const filter = e.currentTarget.dataset.group
+    }
+
+
     return (
-        <TodoContext.Provider value={{ tasks, handleOnUpdateTask, handleOnAddTask, handleOnDeleteTask }}>
+        <TodoContext.Provider value={{ tasks, compare, sortingAsc, handleOnUpdateTask, handleOnAddTask, handleOnDeleteTask, handleSortList, handleOnFilter }}>
             {props.children}
         </TodoContext.Provider>
     );

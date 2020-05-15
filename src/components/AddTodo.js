@@ -39,7 +39,14 @@ const AddTodo = () => {
     <form action="#" onSubmit={(e) => {
       e.preventDefault()
       handleOnAddTask(newTask)
-      history.push(`/`)
+      setNewTask({
+        id: uuidv4(),
+        taskGroup: "",
+        taskName: "",
+        taskDate: "",
+        taskTime: ""
+      })
+      // history.push(`/`)
     }} >
       <Box
         display="flex"
@@ -50,7 +57,7 @@ const AddTodo = () => {
         boxShadow={2}
       >
         <Typography
-          variant="h2"
+          variant="h4"
           color="primary"
           gutterBottom
         >
@@ -122,6 +129,7 @@ const AddTodo = () => {
                 {option}
               </MenuItem>
             ))}
+
           </Select>
           <FormHelperText>Wybierz klasę</FormHelperText>
         </FormControl>
@@ -176,6 +184,7 @@ const AddTodo = () => {
           variant="contained"
           color="primary"
           startIcon={<AddCircleIcon />}
+          onClick={(e) => history.push(`/`)}
         >
           Dodaj
         </Button>

@@ -1,20 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { TodoContext } from "../context/TodoContext";
-import { useHistory } from 'react-router-dom';
+import { useParams, useHistory } from "react-router-dom";
+
 
 import Todo from "./Todo";
 import { compareValues } from "../utils/Utils"
 import Typography from '@material-ui/core/Typography';
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import AddTodo from './AddTodo';
 
-const List = () => {
+const FilterList = () => {
 
+    const { filter } = useParams();
     const { tasks, compare, sortingAsc, handleSortList, handleOnDeleteTask, settingEditTask } = useContext(TodoContext)
     const history = useHistory()
 
-
+    const [filterTasks, setFilterTasks] = useState(
+        tasks.filter((task) => task.taskGroup === filter)
+    )
+    console.log(filterTasks)
     return (
         <div>
             <Box
@@ -50,9 +57,7 @@ const List = () => {
                     width="10%"
                     textAlign="center"
                     ml={2} id="taskGroup"
-                    onClick={
-                        handleSortList
-                    }
+                    onClick={handleSortList}
                 >
                     <Typography
                         variant="h5"
@@ -102,7 +107,7 @@ const List = () => {
                 </Box>
             </Box>
             {
-                tasks.sort(compareValues('taskTime'))
+                filterTasks.sort(compareValues('taskTime'))
                     .sort(compareValues(compare, sortingAsc))
                     .map((item) => (
                         <Todo
@@ -117,8 +122,26 @@ const List = () => {
                         />
                     ))
             }
-        </div >
+            <Box
+                display="flex"
+                justifyContent="space-around"
+                alignItems="center"
+                m={4}
+                p={2}
+                boxShadow={2}
+            >
+                <Button
+                    // id={tasks.id}
+                    onClick={() => history.push(`/`)}
+                    variant="contained"
+                    color="primary"
+                >
+                    Powrót
+                </Button>
+            </Box>
+            <AddTodo />
+        </div>
     )
 }
 
-export default List;
+export default FilterList;

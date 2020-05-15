@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
@@ -10,6 +10,7 @@ import EditForm from "./components/EditForm";
 import TodoContextProvider from "./context/TodoContext";
 import DataToFormContextProvider from "./context/DataToFormContext";
 import "./App.css";
+import FilterList from "./components/FilterList";
 
 function App() {
 
@@ -21,11 +22,12 @@ function App() {
             <Switch>
               <Route exact path="/">
                 <List />
-              </Route>
-              <Route path="/add">
                 <AddTodo />
               </Route>
-              <Route exact path="/edit:id">
+              <Route path="/filter/:filter">
+                <FilterList />
+              </Route>
+              <Route exact path="/edit/:id">
                 <EditForm />
               </Route>
             </Switch>

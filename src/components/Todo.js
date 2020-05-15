@@ -9,9 +9,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 
+
+
 const Todo = (props) => {
 
-  const { handleOnDeleteTask, handleOnEditTask } = useContext(TodoContext);
+  const { handleOnDeleteTask, handleOnFilter } = useContext(TodoContext);
 
   const history = useHistory()
 
@@ -25,15 +27,24 @@ const Todo = (props) => {
       p={2}
       boxShadow={2}
     >
-      <Box width="10%" textAlign="center">
-        <Typography
-          variant="h5"
-          color="primary"
-          gutterBottom
-        >
-          {props.taskGroup}
-        </Typography>
-      </Box>
+      <Tooltip title="filtruj" placement="right">
+        <Box width="6%"
+          textAlign="right"
+          mr={4}
+          data-group={props.taskGroup}
+          onClick={(e) => {
+            handleOnFilter(e)
+            history.push(`/filter/${props.taskGroup}`)
+          }} >
+          <Typography
+            variant="h5"
+            color="primary"
+            gutterBottom
+          >
+            {props.taskGroup}
+          </Typography>
+        </Box>
+      </Tooltip>
       <Tooltip title="Tu będą kiedyś wyświetlane szczeguły zadania ;)">
         <Box width="30%" textAlign="center">
           <Typography
@@ -67,9 +78,9 @@ const Todo = (props) => {
       >
         <Button
           id={props.id}
-          // czy da się przypisać dwa działania pod jedno zdarzenie?
-          onClick={() => history.push(`/edit${props.id}`)}
-          onMouseUp={handleOnEditTask}
+          onClick={(e) => {
+            history.push(`/edit/${props.id}`)
+          }}
           variant="contained"
           color="primary"
           startIcon={<EditIcon />}
