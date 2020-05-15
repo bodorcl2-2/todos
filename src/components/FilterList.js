@@ -10,7 +10,7 @@ import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import AddTodo from './AddTodo';
+
 
 const FilterList = () => {
 
@@ -21,7 +21,7 @@ const FilterList = () => {
     const [filterTasks, setFilterTasks] = useState(
         tasks.filter((task) => task.taskGroup === filter)
     )
-    console.log(filterTasks)
+
     return (
         <div>
             <Box
@@ -139,7 +139,7 @@ const FilterList = () => {
                     Powrót
                 </Button>
             </Box>
-            <AddTodo />
+
         </div>
     )
 }

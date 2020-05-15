@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
 import firebase from '../utils/Firebase'
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 export const TodoContext = createContext();
 
@@ -24,26 +24,21 @@ const TodoContextProvider = (props) => {
         return () => unsubscribe()
     }, [])
 
-    // useEffect(() => {
-    //     const data = localStorage.getItem("my-todo");
-    //     if (data) {
-    //         setTasks(JSON.parse(data))
-    //     }
-    // }, [])
-
     useEffect(() => {
         localStorage.setItem("my-todo", JSON.stringify(tasks))
     })
 
     const handleOnDeleteTask = (e) => {
-        let tasks1 = [...tasks];
-        tasks1 = tasks1.filter((task) => task.id !== e.currentTarget.id);
-        setTasks(tasks1);
+
+        const docId = e.currentTarget.id
+        firebase
+            .firestore()
+            .collection('todos')
+            .doc(docId).delete()
+
     };
 
     const handleOnAddTask = (newTask) => {
-
-        // setTasks((prevState) => [...prevState, newTask]);
 
         firebase
             .firestore()

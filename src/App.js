@@ -29,6 +29,7 @@ function App() {
               </Route>
               <Route exact path="/edit/:id">
                 <EditForm />
+                <AddTodo />
               </Route>
             </Switch>
           </div>

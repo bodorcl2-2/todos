@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { useHistory } from 'react-router-dom'
 import { TodoContext } from "../context/TodoContext";
 import { DataToFormContext } from "../context/DataToFormContext";
-import { v4 as uuidv4 } from "uuid";
 
 import Typography from '@material-ui/core/Typography';
 import FormControl from "@material-ui/core/FormControl";
@@ -20,7 +19,6 @@ const AddTodo = () => {
   const { tasksName, groupsName } = useContext(DataToFormContext)
   const history = useHistory()
   const [newTask, setNewTask] = useState({
-    id: uuidv4(),
     taskGroup: "",
     taskName: "",
     taskDate: "",
@@ -40,7 +38,6 @@ const AddTodo = () => {
       e.preventDefault()
       handleOnAddTask(newTask)
       setNewTask({
-        id: uuidv4(),
         taskGroup: "",
         taskName: "",
         taskDate: "",
