@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { TodoContext } from "../context/TodoContext";
-import { useHistory } from 'react-router-dom';
 
 import Todo from "./Todo";
 import { compareValues } from "../utils/Utils"
@@ -12,8 +11,6 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 const List = () => {
 
     const { tasks, compare, sortingAsc, handleSortList, handleOnDeleteTask, settingEditTask } = useContext(TodoContext)
-    const history = useHistory()
-
 
     return (
         <div>

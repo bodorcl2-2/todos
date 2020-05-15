@@ -47,10 +47,15 @@ const TodoContextProvider = (props) => {
     };
 
     const handleOnUpdateTask = (task) => {
-        const copy = [...tasks]
-        const index = copy.findIndex(item => item.id === task.id);
-        copy[index] = task;
-        setTasks(copy)
+
+        firebase
+            .firestore()
+            .collection("cities")
+            .doc(task.id)
+            .set(
+                task
+            )
+
     }
 
     const handleSortList = (e) => {

@@ -26,6 +26,7 @@ function App() {
               </Route>
               <Route path="/filter/:filter">
                 <FilterList />
+                <AddTodo />
               </Route>
               <Route exact path="/edit/:id">
                 <EditForm />
