@@ -46,7 +46,7 @@ const Todo = (props) => {
           </Typography>
         </Box>
       </Tooltip>
-      <Tooltip title="Tu będą kiedyś wyświetlane szczeguły zadania ;)">
+      <Tooltip title="Tu będą kiedyś wyświetlane szczegóły zadania ;)">
         <Box width="30%" textAlign="center">
           <Typography
             variant="h5"

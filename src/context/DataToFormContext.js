@@ -7,7 +7,7 @@ const DataToFormContextProvider = (props) => {
     const [dataToForm, setdataToForm] = useState(
         {
             tasksName: ["powtórka", "sprawdzian", "kartkówka", "pytanie", "luzik"],
-            groupsName: ["1a", "1b", "1c", "2a", "2b", "2c"]
+            groupsName: ["1a", "1b", "1c", "2a", "2b", "2c", "3a", "3b", "3c"]
         }
     );
 

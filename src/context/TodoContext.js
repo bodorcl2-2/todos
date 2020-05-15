@@ -43,8 +43,12 @@ const TodoContextProvider = (props) => {
 
     const handleOnAddTask = (newTask) => {
 
-        setTasks((prevState) => [...prevState, newTask]);
+        // setTasks((prevState) => [...prevState, newTask]);
 
+        firebase
+            .firestore()
+            .collection('todos')
+            .add(newTask)
     };
 
     const handleOnUpdateTask = (task) => {
