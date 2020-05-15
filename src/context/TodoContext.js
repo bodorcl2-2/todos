@@ -50,7 +50,7 @@ const TodoContextProvider = (props) => {
 
         firebase
             .firestore()
-            .collection("cities")
+            .collection("todos")
             .doc(task.id)
             .set(
                 task
