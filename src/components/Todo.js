@@ -4,7 +4,8 @@ import { TodoContext } from "../context/TodoContext";
 import { reverseString } from '../utils/Utils'
 
 import Typography from '@material-ui/core/Typography';
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import Box from "@material-ui/core/Box";
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -77,26 +78,28 @@ const Todo = (props) => {
         justifyContent="space-around"
         alignItems="center"
       >
-        <Button
+        <IconButton
           id={props.id}
           onClick={(e) => {
             history.push(`/edit/${props.id}`)
           }}
           variant="contained"
           color="primary"
-          startIcon={<EditIcon />}
+        // startIcon={<EditIcon />}
         >
-          Edytuj
-            </Button>
-        <Button
+          <EditIcon />
+          {/* Edytuj */}
+        </IconButton>
+        <IconButton
           id={props.id}
           onClick={handleOnDeleteTask}
           variant="contained"
           color="secondary"
-          startIcon={<DeleteIcon />}
+        // startIcon={<DeleteIcon />}
         >
-          Usuń
-      </Button>
+          <DeleteIcon />
+          {/* Usuń */}
+        </IconButton>
       </Box >
     </Box >
   );

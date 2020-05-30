@@ -9,7 +9,8 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
 import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import Box from "@material-ui/core/Box";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
@@ -176,15 +177,15 @@ const AddTodo = () => {
           <FormHelperText>Godzina</FormHelperText>
         </FormControl>
 
-        <Button
+        <IconButton
           type="submit"
-          variant="contained"
+          // variant="contained"
           color="primary"
-          startIcon={<AddCircleIcon />}
+          // startIcon={<AddCircleIcon />}
           onClick={(e) => history.push(`/`)}
         >
-          Dodaj
-        </Button>
+          <AddCircleIcon />
+        </IconButton>
       </Box>
     </form >
   );

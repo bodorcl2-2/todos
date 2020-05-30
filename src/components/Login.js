@@ -1,29 +1,27 @@
 import React, { useCallback, useContext } from "react";
-import { withRouter, Redirect } from "react-router";
+import { useHistory, Redirect } from "react-router";
 import firebase from '../utils/Firebase';
 import { AuthContext } from "../context/AuthContext";
-const Login = ({ history }) => {
-    const handleLogin = useCallback(
-        async event => {
-            event.preventDefault();
-            const { email, password } = event.target.elements;
-            try {
-                await firebase
-                    .auth()
-                    .signInWithEmailAndPassword(email.value, password.value);
-                history.push("/");
-            } catch (error) {
-                alert(error);
-            }
-        },
-        [history]
-    );
+const Login = () => {
+    const history = useHistory()
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        const { email, password } = e.target.elements;
+        try {
+            await firebase
+                .auth()
+                .signInWithEmailAndPassword(email.value, password.value);
+            history.push("/");
+        } catch (error) {
+            alert(error);
+        }
+    }
+
     const { currentUser } = useContext(AuthContext);
     if (currentUser) {
         return <Redirect to="/" />;
         // return history.push(`/`)
     }
-    console.log('z login.js')
     return (
         <div className="loginContainer">
             <form className="loginForm" onSubmit={handleLogin}>
