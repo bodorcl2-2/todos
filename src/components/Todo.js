@@ -30,7 +30,9 @@ const Todo = (props) => {
       boxShadow={2}
     >
       <Tooltip title="filtruj" placement="right">
-        <Box width="6%"
+        <Box
+          className="cursorPointer"
+          width="6%"
           textAlign="right"
           mr={4}
           data-group={props.taskGroup}

@@ -64,7 +64,7 @@ const FilterList = () => {
                     >
                         Grupa
                     </Typography>
-                    {(sortingAsc === "asc") ? <ArrowUpward fontSize="small" /> : <ArrowDownwardIcon fontSize="small" />}
+                    {/* {(sortingAsc === "asc") ? <ArrowUpward fontSize="small" /> : <ArrowDownwardIcon fontSize="small" />} */}
                 </Box>
                 <Box display="flex"
                     alignItems="center"
@@ -75,6 +75,7 @@ const FilterList = () => {
                     onClick={handleSortList}
                 >
                     <Typography
+                        className="cursorPointer"
                         variant="h5"
                     // color="secondary"
                     >
@@ -90,6 +91,7 @@ const FilterList = () => {
                     id="taskDate"
                     onClick={handleSortList}>
                     <Typography
+                        className="cursorPointer"
                         variant="h6"
                     >
                         Data

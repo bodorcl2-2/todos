@@ -44,7 +44,6 @@ const AddTodo = () => {
         taskDate: "",
         taskTime: ""
       })
-      // history.push(`/`)
     }} >
       <Box
         display="flex"

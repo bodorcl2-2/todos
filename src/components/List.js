@@ -52,6 +52,7 @@ const List = () => {
                     }
                 >
                     <Typography
+                        className="cursorPointer"
                         variant="h5"
                     >
                         Grupa
@@ -67,6 +68,7 @@ const List = () => {
                     onClick={handleSortList}
                 >
                     <Typography
+                        className="cursorPointer"
                         variant="h5"
                     // color="secondary"
                     >
@@ -82,6 +84,7 @@ const List = () => {
                     id="taskDate"
                     onClick={handleSortList}>
                     <Typography
+                        className="cursorPointer"
                         variant="h6"
                     >
                         Data
