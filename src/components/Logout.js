@@ -3,7 +3,9 @@ import firebase from '../utils/Firebase';
 
 const Logout = () => {
     return (
-        <button onClick={() => firebase.auth().signOut()}>Sign out</button>
+        <section className="logoutContainer">
+            <button className="logoutButton" onClick={() => firebase.auth().signOut()}>Wyloguj</button>
+        </section>
     );
 }
 

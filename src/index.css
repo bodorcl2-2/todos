@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #EBECF0;
+
 }
 
 code {
@@ -12,6 +14,88 @@ code {
     monospace;
 }
 
-label {
+.loginContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginForm {
+  width: 300px;
+  margin: auto;
+  padding: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: column; */
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 2em;
+  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #BABECC;
+  /* border: 1px solid #000; */
+
+}
+
+.loginForm * {
+  color: #555
+}
+
+.loginForm h1 {
+  flex-basis: 100%;
+  text-align: center;
+  /* margin-bottom: 1.5em; */
+  text-shadow: 1px 1px 0 #fff;
+}
+
+.loginForm label {
   display: block;
+  flex-basis: 30%;
+  margin: 1.5em 0;
+}
+
+.loginForm input,
+.loginForm button,
+.logoutButton {
+  border: 0;
+  outline: 0;
+  text-shadow: 1px 1px 0 #fff;
+}
+
+.loginForm input {
+  margin-left: .4em;
+  padding: 0.5em;
+  border-radius: .5em;
+  flex-basis: 60%;
+  flex-grow: 1;
+  appearance: none;
+  box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #fff;
+}
+
+.loginForm button {
+  width: 30%;
+  margin: 1em 0 1em;
+  padding: 0.5em 1em;
+  border-radius: .5em;
+  font-weight: bold;
+  color: rgb(42, 185, 7);
+  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #BABECC;
+  cursor: pointer;
+}
+
+.logoutContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5em;
+}
+
+.logoutButton {
+  width: 80px;
+  color: #f00;
+  font-weight: bold;
+  margin: 1em 3em .5em;
+  padding: 0.5em 1em;
+  border-radius: .5em;
+  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #BABECC;
+  cursor: pointer;
 }

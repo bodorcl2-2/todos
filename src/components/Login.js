@@ -25,17 +25,16 @@ const Login = ({ history }) => {
     }
     console.log('z login.js')
     return (
-        <div>
-            <h1>Log in</h1>
-            <form onSubmit={handleLogin}>
-                <label> Email
-          <input name="email" type="email" placeholder="Email" />
-                </label>
-                <label>
-                    Password
-          <input name="password" type="password" placeholder="Password" />
-                </label>
-                <button type="submit">Log in</button>
+        <div className="loginContainer">
+            <form className="loginForm" onSubmit={handleLogin}>
+                <h1>Belfer todo</h1>
+                <label htmlFor="email"> email:</label>
+                <input name="email" id="email" type="email" placeholder="Email" />
+
+                <label htmlFor="password">password:</label>
+                <input name="password" id="password" type="password" placeholder="Password" />
+
+                <button type="submit">Zaloguj</button>
             </form>
         </div>
     );
